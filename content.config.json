@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "contentFormat": "json-html",
+  "siteName": "Mindfulness Journey",
+  "baseUrl": "https://georgemposi.com",
+  "contentDir": "content/posts",
+  "pagesDir": "content/pages",
+  "mediaDir": "public/wp-content/uploads",
+  "mediaPublicPrefix": "/wp-content/uploads/",
+  "searchIndex": "public/search-index.json",
+  "categories": [
+    {
+      "name": "Mindfulness",
+      "slug": "mindfulness"
+    },
+    {
+      "name": "Procrastination",
+      "slug": "procrastination"
+    },
+    {
+      "name": "Yoga",
+      "slug": "yoga"
+    }
+  ],
+  "defaultAuthor": "George M. Posi",
+  "requireDescription": true,
+  "requireFeaturedImage": false,
+  "contactEmail": "info@georgemposi.com"
+}

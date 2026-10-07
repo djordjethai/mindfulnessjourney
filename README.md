@@ -53,13 +53,15 @@ The existing workflow at `.github/workflows/azure-static-web-apps-green-island-0
 
 Do not add another Azure workflow, rename the deployment secret, purge a CDN, modify DNS, or remove the existing WordPress hosting as part of this migration. Production-domain switching is a separate manual step after review.
 
-## Add an occasional post manually
+## Publish new content
 
-1. Copy a recent file from `content/posts/` and rename it to the new URL slug, such as `content/posts/a-quiet-morning.json`.
-2. Give it a unique numeric `id`, set `type` to `post`, update the title, slug, ISO dates, excerpt, HTML body, categories, tags, SEO fields, and both `route` and `oldUrl`.
-3. Put images under `public/wp-content/uploads/YYYY/MM/` and reference them with `/wp-content/uploads/YYYY/MM/file.jpg`.
-4. Add the post entry to `public/search-index.json` until/unless the importer is rerun.
-5. Run `npm run check`, then commit and push after review. Azure deploys the new static export automatically.
+The repository-local skill at `skills/publish-blog-post/SKILL.md` guides Codex through creating or updating posts and pages without changing the established JSON/HTML schema. Publishing settings, category names and slugs, media paths, and the canonical site URL are defined in `content.config.json`.
+
+Create a post interactively with `npm run new-post` or pass values such as `--title`, `--category`, `--date`, `--description`, `--image`, and `--slug`. Local images belong under `public/wp-content/uploads/YYYY/MM/` and use `/wp-content/uploads/YYYY/MM/file.jpg` URLs.
+
+Run `npm run check-content` for content-only validation. `npm run build` validates content and regenerates `public/search-index.json` before the static export, so do not edit the search index, sitemap, category/tag archives, or recent-post lists manually. Run the complete verification sequence with `npm run check` before review.
+
+Creating content does not authorize a commit, push, deployment, DNS change, or Azure change. Those remain explicit follow-up operations.
 
 Keep body HTML semantic: paragraphs, headings, links, lists, blockquotes, tables, figures, and images. Standard `<img>` elements are intentional because runtime Next.js image optimization is unavailable in a pure static export.
 

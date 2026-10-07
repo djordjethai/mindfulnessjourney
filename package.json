@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "next dev",
     "import:wordpress": "tsx scripts/import-wordpress.ts",
-    "test": "vitest run",
-    "build": "next build",
+    "new-post": "python scripts/new_post.py",
+    "check-content": "python scripts/validate_content.py",
+    "test": "vitest run && python -m unittest discover -s tests -p \"test_*.py\"",
+    "build": "python scripts/validate_content.py --sync-search-index && next build",
     "validate": "tsx scripts/validate-urls.ts",
     "check": "npm test && npm run build && npm run validate"
   },

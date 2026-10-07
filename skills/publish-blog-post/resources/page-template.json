@@ -1,0 +1,18 @@
+{
+  "id": 0,
+  "type": "page",
+  "title": "PAGE TITLE",
+  "slug": "page-slug",
+  "date": "YYYY-MM-DDT00:00:00.000Z",
+  "modified": "YYYY-MM-DDT00:00:00.000Z",
+  "author": "AUTHOR NAME",
+  "excerpt": "SHORT DESCRIPTION",
+  "contentHtml": "<p>PAGE BODY</p>",
+  "categories": [],
+  "categorySlugs": [],
+  "tags": [],
+  "tagSlugs": [],
+  "seoDescription": "SHORT DESCRIPTION",
+  "oldUrl": "https://georgemposi.com/page-slug/",
+  "route": "/page-slug/"
+}
