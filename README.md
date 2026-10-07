@@ -43,7 +43,7 @@ npm run build
 npm run validate
 ```
 
-`npm run build` performs a Next.js static export and creates `out/`. `npm run validate` crawls that directory and fails on broken internal links, missing local media, duplicate/missing canonical URLs, localhost references, WordPress runtime endpoints, or uncovered live-sitemap URLs. Run the complete verification sequence with `npm run check`.
+`npm run prepare-content` validates content and regenerates the search index. `npm run build` performs a Next.js static export and creates `out/`. `npm run validate` crawls that directory and fails on broken internal links, missing local media, duplicate/missing canonical URLs, localhost references, WordPress runtime endpoints, or uncovered live-sitemap URLs. Run the complete verification sequence with `npm run check`.
 
 No Node server, database, CMS, authentication, API, or server action is used after the build.
 
@@ -59,7 +59,7 @@ The repository-local skill at `skills/publish-blog-post/SKILL.md` guides Codex t
 
 Create a post interactively with `npm run new-post` or pass values such as `--title`, `--category`, `--date`, `--description`, `--image`, and `--slug`. Local images belong under `public/wp-content/uploads/YYYY/MM/` and use `/wp-content/uploads/YYYY/MM/file.jpg` URLs.
 
-Run `npm run check-content` for content-only validation. `npm run build` validates content and regenerates `public/search-index.json` before the static export, so do not edit the search index, sitemap, category/tag archives, or recent-post lists manually. Run the complete verification sequence with `npm run check` before review.
+Run `npm run check-content` for content-only validation. `npm run prepare-content` validates content and regenerates `public/search-index.json`; the complete `npm run check` sequence runs that preparation before the static export. Do not edit the search index, sitemap, category/tag archives, or recent-post lists manually. Run `npm run check` before review.
 
 Creating content does not authorize a commit, push, deployment, DNS change, or Azure change. Those remain explicit follow-up operations.
 

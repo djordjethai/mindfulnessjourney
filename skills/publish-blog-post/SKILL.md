@@ -17,7 +17,7 @@ Use [resources/post-template.json](resources/post-template.json) only as a schem
 
 ## Verify
 
-Do not manually edit the sitemap, category/tag archives, recent-post lists, or `public/search-index.json`. The Next.js loaders derive the routes and archives, and `npm run build` regenerates the search index.
+Do not manually edit the sitemap, category/tag archives, recent-post lists, or `public/search-index.json`. The Next.js loaders derive the routes and archives, and `npm run prepare-content` regenerates the search index as part of `npm run check`.
 
 Before reporting completion, run:
 

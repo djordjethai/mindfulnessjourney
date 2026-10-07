@@ -8,10 +8,11 @@
     "import:wordpress": "tsx scripts/import-wordpress.ts",
     "new-post": "python scripts/new_post.py",
     "check-content": "python scripts/validate_content.py",
+    "prepare-content": "python scripts/validate_content.py --sync-search-index",
     "test": "vitest run && python -m unittest discover -s tests -p \"test_*.py\"",
-    "build": "python scripts/validate_content.py --sync-search-index && next build",
+    "build": "next build",
     "validate": "tsx scripts/validate-urls.ts",
-    "check": "npm test && npm run build && npm run validate"
+    "check": "npm test && npm run prepare-content && npm run build && npm run validate"
   },
   "dependencies": {
     "cheerio": "1.2.0",
