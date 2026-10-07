@@ -28,4 +28,6 @@ Before reporting completion, run:
 
 Report the changed file, slug, expected public URL, category when applicable, featured image, and the result of each check.
 
+After creating or updating content, verify that the generated sitemap includes the expected public URL. Do not manually edit generated sitemap files unless the project architecture explicitly requires it.
+
 Do not automatically commit, push, deploy, change DNS, or change Azure resources. Perform any of those only when the user explicitly asks.
