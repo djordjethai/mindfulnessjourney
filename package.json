@@ -1,0 +1,31 @@
+{
+  "name": "mindfulness-journey",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "import:wordpress": "tsx scripts/import-wordpress.ts",
+    "test": "vitest run",
+    "build": "next build",
+    "validate": "tsx scripts/validate-urls.ts",
+    "check": "npm test && npm run build && npm run validate"
+  },
+  "dependencies": {
+    "cheerio": "1.2.0",
+    "fast-xml-parser": "5.11.2",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "unzipper": "0.12.3"
+  },
+  "devDependencies": {
+    "@types/node": "25.3.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@types/unzipper": "0.10.11",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "vitest": "5.0.3"
+  }
+}

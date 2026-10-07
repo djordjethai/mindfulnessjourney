@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-10-07T06:53:31.395Z",
+  "postsImported": 103,
+  "pagesImported": 6,
+  "categoriesImported": 3,
+  "usefulTagArchives": 23,
+  "attachmentsInWxr": 348,
+  "attachmentsMapped": 348,
+  "mediaFilesExtracted": 2488,
+  "mediaFilesRetained": 380,
+  "mediaFilesPruned": 2108,
+  "mediaRetainedBytes": 134996380,
+  "mediaPrunedBytes": 224209754,
+  "missingMedia": [],
+  "unresolvedInternalLinks": [],
+  "historicalComments": {
+    "total": 7,
+    "approved": 7
+  },
+  "functionalDependencies": [
+    {
+      "route": "/contact-us/",
+      "type": "form",
+      "detail": "WordPress form controls were removed; preserve any valid outbound links separately."
+    },
+    {
+      "route": "/free-e-book/",
+      "type": "form",
+      "detail": "WordPress form controls were removed; preserve any valid outbound links separately."
+    },
+    {
+      "route": "/free-e-book/",
+      "type": "inline-script",
+      "detail": "Inline WordPress script was removed for the static migration."
+    }
+  ],
+  "removedShortcodes": [
+    {
+      "route": "/contact-us/",
+      "shortcode": "[formidable id=2]"
+    }
+  ],
+  "sitemap": {
+    "oldUrlCount": 113,
+    "generatedUrlCount": 137,
+    "missingUrlCount": 0,
+    "newOnlyUrlCount": 24
+  }
+}

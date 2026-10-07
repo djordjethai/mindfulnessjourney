@@ -1,0 +1,19 @@
+{
+  "id": 1548,
+  "type": "page",
+  "title": "Thank you!",
+  "slug": "thank-you",
+  "date": "2020-04-02T02:10:13.000Z",
+  "modified": "2021-08-29T08:58:58.000Z",
+  "author": "djordjem",
+  "excerpt": "Thank you for visiting Mindfulness Journey.",
+  "contentHtml": "<p>Thank you for visiting Mindfulness Journey.</p><p><a href=\"/\">Read the latest stories</a>, learn more <a href=\"/about-my-quest-to-better-life/\">about this journey</a>, or <a href=\"https://www.amazon.com/George-M-Posi/e/B07MP6CB7C\" target=\"_blank\" rel=\"noreferrer noopener\">explore my books on Amazon</a>.</p>",
+  "categories": [],
+  "categorySlugs": [],
+  "tags": [],
+  "tagSlugs": [],
+  "seoTitle": "%title% %page% %sep% %sitename% %sep% Share the experience",
+  "seoDescription": "Thank you for visiting Mindfulness Journey by George M. Posi.",
+  "oldUrl": "https://georgemposi.com/thank-you/",
+  "route": "/thank-you/"
+}

@@ -1,0 +1,23 @@
+{
+  "id": 5,
+  "type": "page",
+  "title": "Contact Me",
+  "slug": "contact-us",
+  "date": "2018-12-10T11:31:46.000Z",
+  "modified": "2021-08-29T08:55:57.000Z",
+  "author": "djordjem",
+  "excerpt": "Contact George M. Posi at info@georgemposi.com or connect through social media.",
+  "contentHtml": "",
+  "categories": [],
+  "categorySlugs": [],
+  "tags": [],
+  "tagSlugs": [],
+  "featuredImageId": 1259,
+  "featuredImage": "/wp-content/uploads/2019/12/IMG_4789-2.jpg",
+  "featuredImageAlt": "Contact",
+  "seoTitle": "%title% %page% %sep% Share your thoughts %sep% %sitename%",
+  "seoDescription": "Contact George M. Posi at info@georgemposi.com or connect through Facebook, X, Instagram, YouTube, and Amazon.",
+  "focusKeyword": "contact",
+  "oldUrl": "https://georgemposi.com/contact-us/",
+  "route": "/contact-us/"
+}

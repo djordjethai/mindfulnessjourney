@@ -1,0 +1,20 @@
+{
+  "id": 3,
+  "type": "page",
+  "title": "Privacy Policy",
+  "slug": "privacy-policy",
+  "date": "2018-12-10T10:08:21.000Z",
+  "modified": "2020-01-18T04:40:43.000Z",
+  "author": "djordjem",
+  "excerpt": "A plain-language privacy note for the static Mindfulness Journey website.",
+  "contentHtml": "<h2>About this website</h2>\n<p>Mindfulness Journey is a static website. It has no user accounts, comments, contact forms, newsletter signup, advertising, or on-site payment features. The site itself does not use analytics or set marketing cookies.</p>\n<h2>Email</h2>\n<p>If you choose to contact me by email, the message is handled by your email provider and the recipient email provider. Only include information you are comfortable sending by email.</p>\n<h2>External websites</h2>\n<p>This site links to services such as Facebook, X, Instagram, YouTube, and Amazon. Those websites have their own privacy policies and may collect information when you visit them.</p>\n<h2>Hosting</h2>\n<p>The hosting provider may process basic technical request information, such as IP address, browser details, and request time, for security and reliable delivery of the website.</p>\n<h2>Contact</h2>\n<p>For privacy questions, email <a href=\"mailto:info@georgemposi.com\">info@georgemposi.com</a>.</p>",
+  "categories": [],
+  "categorySlugs": [],
+  "tags": [],
+  "tagSlugs": [],
+  "seoTitle": "Privacy Policy",
+  "seoDescription": "Privacy information for the static Mindfulness Journey website.",
+  "focusKeyword": "privacy policy",
+  "oldUrl": "https://georgemposi.com/privacy-policy/",
+  "route": "/privacy-policy/"
+}

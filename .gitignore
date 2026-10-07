@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local WordPress migration sources (large, private, and not deployable assets)
+migration-source/
