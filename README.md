@@ -69,6 +69,8 @@ Keep body HTML semantic: paragraphs, headings, links, lists, blockquotes, tables
 
 `app/sitemap.ts` creates `out/sitemap.xml` from all posts, non-home pages, categories, and useful tags. `app/robots.ts` creates `out/robots.txt`. Each content route generates its canonical URL, description, and Open Graph metadata from the migrated Rank Math values, falling back to Yoast and then the content excerpt.
 
+`lib/structured-data.ts` generates Schema.org JSON-LD from the same content source. Posts use `BlogPosting`; regular, profile, contact, archive, and search pages use the corresponding page type; content routes include `BreadcrumbList`; and the homepage identifies the `WebSite` and George M. Posi as its author and publisher. The static-output validator checks every indexable HTML page for valid JSON-LD whose page identity matches its canonical URL.
+
 The importer downloads the current public sitemap index and compares it with generated routes in `migration/url-audit.json`. The migration should not be published if important entries appear in `missingUrls`.
 
 ## Forms, newsletter, free book, and comments

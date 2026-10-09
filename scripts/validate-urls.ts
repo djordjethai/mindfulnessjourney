@@ -6,6 +6,16 @@ const root = process.cwd();
 const outputRoot = path.join(root, "out");
 
 type ValidationIssue = { page: string; target?: string; issue: string };
+type SchemaNode = Record<string, unknown>;
+
+function schemaTypes(node: SchemaNode): string[] {
+  const value = node["@type"];
+  return Array.isArray(value) ? value.filter((entry): entry is string => typeof entry === "string") : typeof value === "string" ? [value] : [];
+}
+
+function canonicalPageId(canonical: string): string {
+  return `${new URL(canonical).toString()}#webpage`;
+}
 
 function walk(directory: string): string[] {
   return readdirSync(directory).flatMap((name) => {
@@ -38,8 +48,11 @@ function main(): void {
   const htmlFiles = walk(outputRoot).filter((file) => file.endsWith(".html"));
   const issues: ValidationIssue[] = [];
   const canonicals = new Map<string, string>();
+  const postRoutes = new Set(readdirSync(path.join(root, "content", "posts")).filter((file) => file.endsWith(".json")).map((file) => (JSON.parse(readFileSync(path.join(root, "content", "posts", file), "utf8")) as { route: string }).route));
+  const pageRoutes = new Set(readdirSync(path.join(root, "content", "pages")).filter((file) => file.endsWith(".json")).map((file) => (JSON.parse(readFileSync(path.join(root, "content", "pages", file), "utf8")) as { route: string }).route).filter((route) => route !== "/"));
   let checkedLinks = 0;
   let checkedImages = 0;
+  let structuredDataPages = 0;
 
   for (const file of htmlFiles) {
     const route = pageRoute(file);
@@ -56,6 +69,43 @@ function main(): void {
       issues.push({ page: route, target: canonical, issue: `Duplicate canonical also used by ${canonicals.get(canonical)}` });
     } else if (canonical && !isNotFoundArtifact) {
       canonicals.set(canonical, route);
+    }
+
+    if (!isNotFoundArtifact) {
+      const scripts = $('script[type="application/ld+json"]');
+      if (scripts.length !== 1) {
+        issues.push({ page: route, issue: `Expected exactly one JSON-LD graph, found ${scripts.length}` });
+      } else {
+        try {
+          const data = JSON.parse(scripts.first().html() || "") as { "@context"?: unknown; "@graph"?: unknown };
+          const nodes = Array.isArray(data["@graph"]) ? data["@graph"].filter((node): node is SchemaNode => Boolean(node) && typeof node === "object") : [];
+          if (data["@context"] !== "https://schema.org" || !nodes.length) {
+            issues.push({ page: route, issue: "JSON-LD must contain a Schema.org @graph" });
+          } else {
+            structuredDataPages += 1;
+            const types = new Set(nodes.flatMap(schemaTypes));
+            const expectedPageId = canonical ? canonicalPageId(canonical) : undefined;
+            if (expectedPageId && !nodes.some((node) => node["@id"] === expectedPageId)) issues.push({ page: route, target: expectedPageId, issue: "JSON-LD WebPage ID does not match canonical URL" });
+            if (route === "/" && !types.has("WebSite")) issues.push({ page: route, issue: "Homepage JSON-LD is missing WebSite" });
+            if (route !== "/" && !types.has("BreadcrumbList")) issues.push({ page: route, issue: "JSON-LD is missing BreadcrumbList" });
+            if (postRoutes.has(route)) {
+              const article = nodes.find((node) => schemaTypes(node).includes("BlogPosting"));
+              if (!article) {
+                issues.push({ page: route, issue: "Post JSON-LD is missing BlogPosting" });
+              } else if (typeof article.headline !== "string" || typeof article.datePublished !== "string" || typeof article.dateModified !== "string" || !Array.isArray(article.image) || !article.image.length) {
+                issues.push({ page: route, issue: "BlogPosting is missing headline, dates, or image required for rich-result quality" });
+              }
+              if (!$(".article-date").text().includes("George M. Posi")) issues.push({ page: route, issue: "Visible post byline does not use the public author identity" });
+            }
+            if (pageRoutes.has(route) && !["WebPage", "ProfilePage", "ContactPage"].some((type) => types.has(type))) issues.push({ page: route, issue: "Page JSON-LD is missing a WebPage type" });
+            if ((route.startsWith("/category/") || route.startsWith("/tag/")) && !types.has("CollectionPage")) issues.push({ page: route, issue: "Archive JSON-LD is missing CollectionPage" });
+            if (route === "/search/" && !types.has("SearchResultsPage")) issues.push({ page: route, issue: "Search JSON-LD is missing SearchResultsPage" });
+            if (postRoutes.has(route) && !nodes.some((node) => schemaTypes(node).includes("Person") && node.name === "George M. Posi")) issues.push({ page: route, issue: "Post JSON-LD is missing the public author identity" });
+          }
+        } catch {
+          issues.push({ page: route, issue: "JSON-LD is not valid JSON" });
+        }
+      }
     }
 
     $("a[href]").each((_index, anchor) => {
@@ -96,7 +146,7 @@ function main(): void {
     for (const missing of audit.missingUrls || []) issues.push({ page: "/sitemap.xml", target: missing, issue: "Live sitemap URL is not generated" });
   }
 
-  const summary = { htmlPages: htmlFiles.length, checkedLinks, checkedImages, uniqueCanonicals: canonicals.size, issues };
+  const summary = { htmlPages: htmlFiles.length, checkedLinks, checkedImages, uniqueCanonicals: canonicals.size, structuredDataPages, issues };
   console.log(JSON.stringify(summary, null, 2));
   if (issues.length) throw new Error(`Static output validation found ${issues.length} issue(s).`);
 }

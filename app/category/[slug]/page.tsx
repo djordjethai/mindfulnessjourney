@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArticleCard } from "@/components/ArticleCard";
+import { JsonLd } from "@/components/JsonLd";
 import { getCategories, getCategory, getPostsByCategory } from "@/lib/content";
 import { absoluteUrl, SITE_NAME, stripSeoVariables } from "@/lib/seo";
+import { archiveStructuredData } from "@/lib/structured-data";
 
 export const dynamicParams = false;
 
@@ -25,8 +27,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const category = getCategory(slug);
   if (!category) notFound();
   const posts = getPostsByCategory(slug);
+  const description = category.seoDescription || `${category.name} stories from ${SITE_NAME}.`;
   return (
     <main className="archive-page shell">
+      <JsonLd data={archiveStructuredData({ title: category.name, description, route: `/category/${slug}/`, posts })} />
       <header className="archive-header reading-width">
         <p className="eyebrow">Journal theme</p>
         <h1>{category.name}</h1>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ContactDetails } from "@/components/ContactDetails";
+import { JsonLd } from "@/components/JsonLd";
+import { contentStructuredData, PUBLIC_AUTHOR_NAME } from "@/lib/structured-data";
 import type { ContentItem } from "@/lib/types";
 
 const dateFormatter = new Intl.DateTimeFormat("en", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
@@ -16,6 +18,7 @@ export function ArticleLayout({
   const isPost = item.type === "post";
   return (
     <main>
+      <JsonLd data={contentStructuredData(item)} />
       <header className="article-hero shell reading-width">
         {isPost && item.categories.length ? (
           <div className="eyebrow article-categories">
@@ -31,7 +34,7 @@ export function ArticleLayout({
         {isPost ? (
           <p className="article-date">
             <time dateTime={item.date}>{dateFormatter.format(new Date(item.date))}</time>
-            {item.author ? ` · ${item.author}` : ""}
+            {` · ${PUBLIC_AUTHOR_NAME}`}
           </p>
         ) : null}
       </header>

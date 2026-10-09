@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleCard } from "@/components/ArticleCard";
 import { CategoryCard } from "@/components/CategoryCard";
+import { JsonLd } from "@/components/JsonLd";
 import { getCategories, getPages, getPosts, getPostsByCategory, getPostsByTag } from "@/lib/content";
 import { SITE_NAME, SITE_SUBTITLE, SITE_URL } from "@/lib/seo";
+import { homeStructuredData } from "@/lib/structured-data";
+
+const description = "Personal reflections on mindfulness, meditation, yoga, life in Thailand, and the journey toward inner peace.";
 
 export const metadata: Metadata = {
   title: { absolute: `${SITE_NAME} — ${SITE_SUBTITLE}` },
-  description: "Personal reflections on mindfulness, meditation, yoga, life in Thailand, and the journey toward inner peace.",
+  description,
   alternates: { canonical: SITE_URL },
   openGraph: { title: SITE_NAME, description: SITE_SUBTITLE, url: SITE_URL },
 };
@@ -20,6 +24,7 @@ export default function HomePage(): React.JSX.Element {
 
   return (
     <main>
+      <JsonLd data={homeStructuredData(description)} />
       <section className="home-hero">
         <div className="shell hero-grid">
           <div className="hero-copy">
